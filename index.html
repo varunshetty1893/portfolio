@@ -3,7 +3,7 @@
 <head>
   <meta charset="UTF-8"/>
   <meta name="viewport" content="width=device-width, initial-scale=1.0"/>
-  <title>Varun Shetty B — ML & Full-Stack Developer</title>
+  <title>Varun Shetty B — Full-Stack & ML Developer</title>
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@300;400;500;600;700;800;900&family=JetBrains+Mono:wght@400;500;600&display=swap" rel="stylesheet">
   <style>
@@ -46,7 +46,7 @@
       overflow-x: hidden;
     }
 
-    /* ── NOISE TEXTURE ── */
+    /* NOISE TEXTURE */
     body::before {
       content: '';
       position: fixed; inset: 0; z-index: 0;
@@ -54,14 +54,14 @@
       pointer-events: none;
     }
 
-    /* ── NAV ── */
+    /* NAV */
     nav {
       position: fixed; top: 0; left: 0; right: 0; z-index: 200;
       background: rgba(10,15,30,0.85);
       backdrop-filter: blur(20px);
       border-bottom: 1px solid var(--border);
       padding: 0 2.5rem;
-      height: 62px;
+      height: 65px;
       display: flex; align-items: center; justify-content: space-between;
     }
     .nav-logo {
@@ -69,22 +69,30 @@
       color: var(--text);
       letter-spacing: -0.04em;
       display: flex; align-items: center; gap: 0.4rem;
+      text-decoration: none;
     }
     .nav-logo-dot {
-      width: 7px; height: 7px; border-radius: 50%;
+      width: 8px; height: 8px; border-radius: 50%;
       background: var(--primary);
       box-shadow: 0 0 8px var(--primary);
       animation: blink 2.5s infinite;
     }
     @keyframes blink { 0%,100%{opacity:1} 50%{opacity:0.4} }
-    .nav-links { display: flex; gap: 0.15rem; list-style: none; }
+    .nav-links { display: flex; gap: 0.2rem; list-style: none; align-items: center; }
     .nav-links a {
       text-decoration: none; color: var(--muted);
-      font-size: 0.83rem; font-weight: 500;
-      padding: 0.4rem 0.8rem; border-radius: 8px;
+      font-size: 0.85rem; font-weight: 500;
+      padding: 0.45rem 0.85rem; border-radius: 8px;
       transition: all 0.18s;
     }
     .nav-links a:hover { background: var(--primary-dim); color: var(--primary); }
+    .nav-resume {
+      background: rgba(255,255,255,0.06) !important;
+      color: var(--text) !important;
+      border: 1px solid var(--border2) !important;
+      margin-left: 0.5rem;
+    }
+    .nav-resume:hover { border-color: var(--primary) !important; color: var(--primary) !important; }
     .nav-hire {
       background: var(--primary) !important;
       color: #fff !important;
@@ -93,12 +101,12 @@
     }
     .nav-hire:hover { opacity: 0.9 !important; transform: translateY(-1px); }
 
-    /* ── HERO ── */
+    /* HERO */
     #hero {
       min-height: 100vh;
       display: grid; grid-template-columns: 1.15fr 1fr;
       align-items: center; gap: 3rem;
-      padding: 9rem 2.5rem 5rem;
+      padding: 8.5rem 2.5rem 5rem;
       max-width: 1200px; margin: 0 auto;
       position: relative; z-index: 1;
     }
@@ -151,18 +159,19 @@
     .hero-sub {
       font-size: 1rem; color: var(--text2);
       line-height: 1.8; margin-bottom: 2.5rem;
-      max-width: 460px;
+      max-width: 480px;
     }
     .hero-sub strong { color: var(--text); font-weight: 600; }
 
     .hero-cta { display: flex; gap: 0.75rem; flex-wrap: wrap; margin-bottom: 3.5rem; }
     .btn {
-      display: inline-flex; align-items: center; gap: 0.45rem;
-      padding: 0.72rem 1.5rem; border-radius: 10px;
+      display: inline-flex; align-items: center; gap: 0.5rem;
+      padding: 0.75rem 1.5rem; border-radius: 10px;
       font-weight: 600; font-size: 0.875rem;
       text-decoration: none; transition: all 0.2s;
       border: 1.5px solid transparent;
       position: relative; overflow: hidden;
+      cursor: pointer;
     }
     .btn-primary {
       background: var(--primary); color: #fff;
@@ -170,6 +179,11 @@
       box-shadow: 0 4px 16px var(--primary-glow);
     }
     .btn-primary:hover { transform: translateY(-2px); box-shadow: 0 8px 28px var(--primary-glow); }
+    .btn-secondary {
+      background: var(--green-dim); color: var(--green);
+      border-color: rgba(61,220,151,0.3);
+    }
+    .btn-secondary:hover { transform: translateY(-2px); background: rgba(61,220,151,0.22); }
     .btn-outline {
       background: transparent; color: var(--text2);
       border-color: var(--border2);
@@ -244,7 +258,7 @@
     .skill-bar { background: rgba(255,255,255,0.06); border-radius: 100px; height: 5px; overflow: hidden; }
     .skill-fill { height: 100%; border-radius: 100px; background: linear-gradient(90deg, var(--primary), var(--cyan)); }
 
-    /* ── SECTION ── */
+    /* SECTION */
     .section-wrap { max-width: 1200px; margin: 0 auto; padding: 6rem 2.5rem; position: relative; z-index: 1; }
     .section-header { margin-bottom: 3rem; }
     .eyebrow {
@@ -259,9 +273,8 @@
       font-weight: 800; letter-spacing: -0.04em; color: var(--text);
     }
     h2 .accent { color: var(--primary); }
-    .section-sep { border: none; border-top: 1px solid var(--border); }
 
-    /* ── ABOUT ── */
+    /* ABOUT */
     #about { background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
     .about-grid { display: grid; grid-template-columns: 3fr 2fr; gap: 4rem; align-items: start; }
     .about-text p { color: var(--text2); line-height: 1.9; margin-bottom: 1.1rem; font-size: 0.95rem; }
@@ -291,7 +304,7 @@
     .info-val { font-size: 0.86rem; color: var(--text2); font-weight: 500; margin-top: 0.15rem; }
     .avail-dot { display: inline-block; width: 7px; height: 7px; border-radius: 50%; background: var(--green); margin-right: 6px; animation: pulse 2s infinite; box-shadow: 0 0 6px var(--green); }
 
-    /* ── SKILLS ── */
+    /* SKILLS */
     #skills { background: var(--bg); }
     .skills-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(265px, 1fr)); gap: 1.25rem; }
     .skill-card {
@@ -331,7 +344,7 @@
     }
     .pill.hot { background: var(--primary-dim); color: var(--primary); border-color: rgba(109,139,255,0.3); font-weight: 600; }
 
-    /* ── PROJECTS ── */
+    /* PROJECTS */
     #projects { background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
     .projects-grid { display: grid; grid-template-columns: repeat(auto-fill, minmax(340px, 1fr)); gap: 1.5rem; }
     .proj-card {
@@ -366,15 +379,19 @@
     .proj-desc { font-size: 0.85rem; color: var(--muted); line-height: 1.75; margin-bottom: 1.25rem; flex: 1; }
     .proj-stack { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-bottom: 1.25rem; }
     .st { font-size: 0.7rem; font-weight: 600; font-family: var(--mono); padding: 0.2rem 0.55rem; border-radius: 5px; }
+    .proj-links { display: flex; gap: 0.8rem; align-items: center; }
     .proj-link {
       display: inline-flex; align-items: center; gap: 0.4rem;
       font-size: 0.8rem; font-weight: 600; color: var(--primary);
       text-decoration: none; transition: gap 0.2s;
       font-family: var(--mono);
     }
-    .proj-link:hover { gap: 0.7rem; }
+    .proj-link:hover { gap: 0.6rem; }
+    .proj-link-demo {
+      color: var(--green) !important;
+    }
 
-    /* ── EXPERIENCE ── */
+    /* EXPERIENCE */
     #experience { background: var(--bg); }
     .exp-card {
       background: var(--card); border: 1px solid var(--border2);
@@ -411,7 +428,7 @@
     .exp-desc { font-size: 0.88rem; color: var(--text2); line-height: 1.8; }
     .exp-tags { display: flex; flex-wrap: wrap; gap: 0.4rem; margin-top: 1.1rem; }
 
-    /* ── EDUCATION ── */
+    /* EDUCATION */
     #education { background: var(--bg2); border-top: 1px solid var(--border); border-bottom: 1px solid var(--border); }
     .edu-grid { display: flex; flex-direction: column; gap: 1rem; }
     .edu-card {
@@ -436,12 +453,8 @@
       font-size: 0.82rem; padding: 0.4rem 0.9rem; border-radius: 8px;
       white-space: nowrap; font-family: var(--mono);
     }
-    .edu-gpa-done {
-      background: rgba(255,255,255,0.05); color: var(--muted);
-      border-color: var(--border2);
-    }
 
-    /* ── CONTACT ── */
+    /* CONTACT */
     #contact { background: var(--bg); border-top: 1px solid var(--border); }
     .contact-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 4rem; align-items: start; }
     .contact-left h2 { color: var(--text); margin-bottom: 1rem; }
@@ -456,7 +469,7 @@
     .c-link:last-child { border-bottom: none; }
     .c-link:hover { color: var(--primary); }
     .c-icon {
-      width: 38px; height: 38px; border-radius: 9px;
+      width: 38px; height: 38px; border-radius: 99px;
       background: var(--primary-dim); border: 1px solid rgba(109,139,255,0.25);
       display: flex; align-items: center; justify-content: center;
       font-size: 0.95rem; flex-shrink: 0;
@@ -481,7 +494,7 @@
     .form-group textarea { height: 110px; }
     .btn-full { width: 100%; justify-content: center; }
 
-    /* ── FOOTER ── */
+    /* FOOTER */
     footer {
       background: var(--bg);
       border-top: 1px solid var(--border);
@@ -491,11 +504,11 @@
     }
     footer strong { color: var(--text2); }
 
-    /* ── REVEAL ── */
+    /* REVEAL */
     .reveal { opacity: 0; transform: translateY(28px); transition: opacity 0.6s ease, transform 0.6s ease; }
     .reveal.visible { opacity: 1; transform: translateY(0); }
 
-    /* ── RESPONSIVE ── */
+    /* RESPONSIVE */
     @media (max-width: 960px) {
       #hero { grid-template-columns: 1fr; padding-top: 7.5rem; }
       .hero-glow, .hero-glow2 { display: none; }
@@ -518,15 +531,18 @@
 
 <!-- NAV -->
 <nav>
-  <div class="nav-logo">
+  <a href="#" class="nav-logo">
     <div class="nav-logo-dot"></div>
     Varun Shetty B
-  </div>
+  </a>
   <ul class="nav-links">
     <li><a href="#about">About</a></li>
     <li><a href="#skills">Skills</a></li>
     <li><a href="#projects">Projects</a></li>
     <li><a href="#experience">Experience</a></li>
+    <li><a href="#education">Education</a></li>
+    <!-- DOWNLOAD RESUME BUTTON IN NAV -->
+    <li><a href="Varun_Shetty_B_Resume.pdf" download class="nav-resume">📄 Resume</a></li>
     <li><a href="#contact" class="nav-hire">Hire Me</a></li>
   </ul>
 </nav>
@@ -539,21 +555,22 @@
     <div class="hero-left">
       <div class="hero-eyebrow">
         <div class="hero-eyebrow-dot"></div>
-        Available for work — June 2026
+        Available for Software &amp; ML Roles
       </div>
-      <h1>ML &amp; Full‑Stack<br><span class="h1-gradient">Developer</span></h1>
+      <h1>Full-Stack &amp; ML<br><span class="h1-gradient">Developer</span></h1>
       <p class="hero-sub">
-        I'm <strong>Varun Shetty B</strong>, an MCA student from Mangalore building intelligent applications — from medical image classifiers to LLM-powered interview simulators.
+        I'm <strong>Varun Shetty B</strong>, an MCA student building scalable web applications and intelligent machine learning solutions — from AI mock interview platforms to medical imaging classifiers.
       </p>
       <div class="hero-cta">
         <a href="#projects" class="btn btn-primary">View Projects →</a>
+        <!-- DOWNLOAD RESUME BUTTON IN HERO -->
+        <a href="Varun_Shetty_B_Resume.pdf" download class="btn btn-secondary">📄 Download Resume</a>
         <a href="https://github.com/varunshetty1893" target="_blank" class="btn btn-outline">GitHub ↗</a>
-        <a href="https://www.linkedin.com/in/varun-shetty-b-b607bb2a6/" target="_blank" class="btn btn-outline">LinkedIn ↗</a>
       </div>
       <div class="hero-stats">
         <div class="stat">
-          <div class="stat-val">8<span>.8</span></div>
-          <div class="stat-lbl">CGPA</div>
+          <div class="stat-val">8<span>.7</span></div>
+          <div class="stat-lbl">BCA CGPA</div>
         </div>
         <div class="stat">
           <div class="stat-val">7<span>+</span></div>
@@ -561,43 +578,36 @@
         </div>
         <div class="stat">
           <div class="stat-val">4<span>mo</span></div>
-          <div class="stat-lbl">Industry Exp.</div>
+          <div class="stat-lbl">Internship</div>
         </div>
       </div>
     </div>
 
     <div class="hero-visual">
       <div class="hero-badge">Open to Roles 🚀</div>
+      
+      <!-- FEATURED PROJECT 1: PARKWISE -->
       <div class="hero-card">
-        <div class="hc-label">★ Featured Project</div>
+        <div class="hc-label">★ FLAGSHIP PROJECT</div>
+        <div class="hc-title">ParkWise Platform</div>
+        <div class="hc-sub">Enterprise Parking &amp; Revenue platform with live slot grid, payroll &amp; 640+ tests</div>
+        <div class="hc-tags">
+          <span class="hc-tag tag-indigo">Flask</span>
+          <span class="hc-tag tag-cyan">PostgreSQL</span>
+          <span class="hc-tag tag-violet">Alpine.js</span>
+          <span class="hc-tag tag-green">Tailwind</span>
+        </div>
+      </div>
+
+      <!-- FEATURED PROJECT 2: AI INTERVIEWER -->
+      <div class="hero-card">
+        <div class="hc-label">★ LIVE DEPLOYMENT</div>
         <div class="hc-title">AI Interviewer</div>
-        <div class="hc-sub">LLaMA 3.3 70B powered mock interview simulator with scored reports</div>
+        <div class="hc-sub">LLaMA 3.3 70B powered mock interview simulator with dynamic scoring</div>
         <div class="hc-tags">
           <span class="hc-tag tag-indigo">Python</span>
           <span class="hc-tag tag-cyan">Groq API</span>
-          <span class="hc-tag tag-violet">Flask</span>
-          <span class="hc-tag tag-green">LLM</span>
-        </div>
-      </div>
-      <div class="hero-card">
-        <div class="hc-label">Skills Snapshot</div>
-        <div class="skill-bar-wrap">
-          <div style="margin-bottom:0.9rem">
-            <div class="skill-row"><span>Machine Learning</span><span>90%</span></div>
-            <div class="skill-bar"><div class="skill-fill" style="width:90%"></div></div>
-          </div>
-          <div style="margin-bottom:0.9rem">
-            <div class="skill-row"><span>Python / Flask</span><span>88%</span></div>
-            <div class="skill-bar"><div class="skill-fill" style="width:88%"></div></div>
-          </div>
-          <div style="margin-bottom:0.9rem">
-            <div class="skill-row"><span>Full-Stack Web Dev</span><span>82%</span></div>
-            <div class="skill-bar"><div class="skill-fill" style="width:82%"></div></div>
-          </div>
-          <div>
-            <div class="skill-row"><span>PHP / MySQL</span><span>78%</span></div>
-            <div class="skill-bar"><div class="skill-fill" style="width:78%"></div></div>
-          </div>
+          <span class="hc-tag tag-amber">Live Demo</span>
         </div>
       </div>
     </div>
@@ -610,52 +620,53 @@
     <div class="reveal">
       <div class="section-header">
         <div class="eyebrow">About Me</div>
-        <h2>Building things that <span class="accent">matter</span></h2>
+        <h2>Building practical solutions that <span class="accent">scale</span></h2>
       </div>
       <div class="about-grid">
         <div class="about-text">
           <p>
-            I'm a <strong>final-year MCA student at Mangalore University</strong> with a passion for combining machine learning and web development to build practical, impactful solutions. My interest spans from training deep learning models to shipping full-stack web applications.
+            I'm an enthusiastic <strong>MCA student at Mangalore University</strong> with skills in full-stack web development and a strong focus on AI/ML applications. I specialize in building scalable web platforms, integrating ML models, and designing database architectures.
           </p>
           <p>
-            I completed a <strong>4-month remote internship at TestSavvy</strong> (Bengaluru), where I built a Student Result Management System that went into production. Outside of that, I've independently built projects like an AI-powered interview simulator using Groq's LLaMA 3.3 70B, a COVID-19 CT scan classifier using DenseNet121, and an agriculture e-commerce platform.
+            During my BCA internship at <strong>TestSavvy (Bengaluru)</strong>, I built a production-ready Student Result Management System. Recently, I developed <strong>ParkWise</strong> (a complete Flask + PostgreSQL parking revenue platform with 640+ automated tests) and <strong>AI Interviewer</strong> (a live LLaMA 3.3 70B interview simulator).
           </p>
           <p>
-            I'm currently <strong>actively seeking full-time roles</strong> as a Software Developer, Web Developer, or ML Engineer. I love tackling problems that require both analytical thinking and solid engineering.
+            I am <strong>actively seeking full-time opportunities</strong> as a Software Developer, Web Developer, or ML Engineer. Quick learner, strong problem-solver, and ready to contribute to real-world software teams.
           </p>
           <div class="about-chips">
+            <span class="chip">Full-Stack Web Dev</span>
             <span class="chip">Machine Learning</span>
-            <span class="chip">Full-Stack Dev</span>
             <span class="chip">Python</span>
             <span class="chip">Flask</span>
-            <span class="chip">Computer Vision</span>
+            <span class="chip">PostgreSQL / MySQL</span>
+            <span class="chip">JavaScript</span>
             <span class="chip">LLM Integration</span>
           </div>
         </div>
         <div class="info-card">
           <div class="info-row">
             <span class="info-icon">📍</span>
-            <div><div class="info-key">Location</div><div class="info-val">Mangalore, Karnataka, IN</div></div>
+            <div><div class="info-key">Location</div><div class="info-val">Shivamogga / Mangalore, KA</div></div>
           </div>
           <div class="info-row">
             <span class="info-icon">🎓</span>
-            <div><div class="info-key">Education</div><div class="info-val">MCA, Mangalore University</div></div>
+            <div><div class="info-key">Education</div><div class="info-val">MCA (Pursuing) · BCA (8.7 CGPA)</div></div>
           </div>
           <div class="info-row">
             <span class="info-icon">💼</span>
-            <div><div class="info-key">Status</div><div class="info-val"><span class="avail-dot"></span>Open to opportunities</div></div>
+            <div><div class="info-key">Status</div><div class="info-val"><span class="avail-dot"></span>Open to software roles</div></div>
           </div>
           <div class="info-row">
             <span class="info-icon">✉️</span>
-            <div><div class="info-key">Email</div><div class="info-val">shettybvarun@email.com</div></div>
+            <div><div class="info-key">Email</div><div class="info-val">shettybvarun@gmail.com</div></div>
           </div>
           <div class="info-row">
-            <span class="info-icon">🏅</span>
-            <div><div class="info-key">Certifications</div><div class="info-val">Microsoft Learn · HackerRank</div></div>
+            <span class="info-icon">📞</span>
+            <div><div class="info-key">Phone</div><div class="info-val">+91 81236 65363</div></div>
           </div>
           <div class="info-row">
-            <span class="info-icon">🎯</span>
-            <div><div class="info-key">Focus</div><div class="info-val">SWE · Web Dev · ML Engineer</div></div>
+            <span class="info-icon">📄</span>
+            <div><div class="info-key">Resume</div><div class="info-val"><a href="Varun_Shetty_B_Resume.pdf" download style="color:var(--primary); font-weight:600; text-decoration:none;">Download PDF 📥</a></div></div>
           </div>
         </div>
       </div>
@@ -668,30 +679,29 @@
   <div class="section-wrap">
     <div class="reveal">
       <div class="section-header">
-        <div class="eyebrow">Tech Stack</div>
+        <div class="eyebrow">Technical Skills</div>
         <h2>What I <span class="accent">work with</span></h2>
       </div>
       <div class="skills-grid">
         <div class="skill-card sc-indigo">
-          <div class="skill-card-icon icon-indigo">🐍</div>
-          <h3>Languages</h3>
+          <div class="skill-card-icon icon-indigo">💻</div>
+          <h3>Programming</h3>
           <div class="pill-group">
             <span class="pill hot">Python</span>
             <span class="pill hot">JavaScript</span>
-            <span class="pill">Java</span>
             <span class="pill">PHP</span>
-            <span class="pill">SQL</span>
-            <span class="pill">HTML / CSS</span>
+            <span class="pill">Java</span>
+            <span class="pill">C / C++</span>
+            <span class="pill">HTML5 &amp; CSS3</span>
           </div>
         </div>
         <div class="skill-card sc-cyan">
           <div class="skill-card-icon icon-cyan">⚙️</div>
-          <h3>Frameworks</h3>
+          <h3>Frameworks &amp; Web</h3>
           <div class="pill-group">
             <span class="pill hot">Flask</span>
-            <span class="pill hot">Scikit-learn</span>
-            <span class="pill">NumPy</span>
-            <span class="pill">Pandas</span>
+            <span class="pill hot">Tailwind CSS</span>
+            <span class="pill">Alpine.js</span>
             <span class="pill">Bootstrap</span>
           </div>
         </div>
@@ -699,23 +709,24 @@
           <div class="skill-card-icon icon-amber">🗄️</div>
           <h3>Databases &amp; Tools</h3>
           <div class="pill-group">
+            <span class="pill hot">PostgreSQL</span>
             <span class="pill hot">MySQL</span>
             <span class="pill">SQLite</span>
-            <span class="pill">Git</span>
-            <span class="pill">GitHub</span>
+            <span class="pill">Git &amp; GitHub</span>
             <span class="pill">VS Code</span>
+            <span class="pill">Docker</span>
           </div>
         </div>
         <div class="skill-card sc-violet">
           <div class="skill-card-icon icon-violet">🤖</div>
-          <h3>ML &amp; AI</h3>
+          <h3>AI / ML Concepts</h3>
           <div class="pill-group">
             <span class="pill hot">Machine Learning</span>
-            <span class="pill hot">Computer Vision</span>
-            <span class="pill">SVM</span>
-            <span class="pill">Random Forest</span>
-            <span class="pill">DenseNet121</span>
-            <span class="pill">LLM APIs</span>
+            <span class="pill hot">Scikit-learn</span>
+            <span class="pill">NumPy</span>
+            <span class="pill">Pandas</span>
+            <span class="pill">SVM &amp; Random Forest</span>
+            <span class="pill">LLM Integration</span>
           </div>
         </div>
       </div>
@@ -729,103 +740,124 @@
     <div class="reveal">
       <div class="section-header">
         <div class="eyebrow">Projects</div>
-        <h2>Things I've <span class="accent">built</span></h2>
+        <h2>Featured <span class="accent">Work</span></h2>
       </div>
       <div class="projects-grid">
 
+        <!-- PROJECT 1: PARKWISE -->
         <div class="proj-card">
           <div class="proj-accent acc-indigo"></div>
           <div class="proj-top">
-            <div class="proj-icon">🤖</div>
-            <span class="proj-badge">★ FEATURED</span>
+            <div class="proj-icon">🅿️</div>
+            <span class="proj-badge">★ FLAGSHIP</span>
           </div>
-          <div class="proj-title">AI Interviewer</div>
-          <div class="proj-desc">Mock interview simulator powered by Groq's LLaMA 3.3 70B. Paste a job description, answer 10 dynamic questions, and get a scored performance report — end-to-end interview practice.</div>
+          <div class="proj-title">ParkWise Platform</div>
+          <div class="proj-desc">Enterprise Parking Operations &amp; Revenue System with 2D live slot grid, dynamic tariffs, shift attendance, monthly payroll lock, audit logging, and 640+ automated tests.</div>
           <div class="proj-stack">
             <span class="st tag-indigo">Python</span>
-            <span class="st tag-cyan">LLaMA 3.3 70B</span>
             <span class="st tag-violet">Flask</span>
-            <span class="st tag-green">Groq API</span>
+            <span class="st tag-cyan">PostgreSQL</span>
+            <span class="st tag-green">Alpine.js</span>
           </div>
-          <a href="https://github.com/varunshetty1893" target="_blank" class="proj-link">View on GitHub →</a>
+          <div class="proj-links">
+            <a href="https://github.com/varunshetty1893/parkwise" target="_blank" class="proj-link">GitHub Repo →</a>
+          </div>
         </div>
 
+        <!-- PROJECT 2: AI INTERVIEWER -->
         <div class="proj-card">
           <div class="proj-accent acc-cyan"></div>
           <div class="proj-top">
-            <div class="proj-icon">🫁</div>
-            <span class="proj-badge">★ FEATURED</span>
+            <div class="proj-icon">🎯</div>
+            <span class="proj-badge">★ LIVE DEPLOYED</span>
           </div>
-          <div class="proj-title">COVID-19 CT Scan Classifier</div>
-          <div class="proj-desc">Medical image classifier using DenseNet121 for feature extraction, combined with SVM, Random Forest &amp; Logistic Regression to detect COVID-19 from chest CT scans.</div>
+          <div class="proj-title">AI Interviewer</div>
+          <div class="proj-desc">AI-powered mock interview simulator. Paste any Job Description, answer 10 dynamic LLM questions, and receive an instant scored evaluation report.</div>
           <div class="proj-stack">
             <span class="st tag-indigo">Python</span>
-            <span class="st tag-cyan">DenseNet121</span>
-            <span class="st tag-green">Scikit-learn</span>
-            <span class="st tag-amber">SVM</span>
+            <span class="st tag-cyan">Groq LLaMA 3.3 70B</span>
+            <span class="st tag-violet">Flask</span>
+            <span class="st tag-amber">Render</span>
           </div>
-          <a href="https://github.com/varunshetty1893" target="_blank" class="proj-link">View on GitHub →</a>
+          <div class="proj-links">
+            <a href="https://ai-interviewer-1-zxke.onrender.com/" target="_blank" class="proj-link proj-link-demo">🚀 Live Demo →</a>
+            <a href="https://github.com/varunshetty1893/AI-Interviewr" target="_blank" class="proj-link">GitHub →</a>
+          </div>
         </div>
 
+        <!-- PROJECT 3: COVID CT SCAN -->
         <div class="proj-card">
           <div class="proj-accent acc-amber"></div>
           <div class="proj-top">
-            <div class="proj-icon">🥗</div>
+            <div class="proj-icon">🔬</div>
           </div>
-          <div class="proj-title">Smart Fitness Diet Planner</div>
-          <div class="proj-desc">Flask + SQLite app that generates personalized diet and exercise plans based on BMI, age, and activity level. Rule-based engine with a clean dashboard UI.</div>
+          <div class="proj-title">COVID-19 &amp; Pneumonia Detection</div>
+          <div class="proj-desc">Machine learning classification model detecting COVID-19, Pneumonia &amp; Normal CT scan images using SVM, Random Forest, and Logistic Regression with image preprocessing.</div>
           <div class="proj-stack">
-            <span class="st tag-violet">Flask</span>
             <span class="st tag-indigo">Python</span>
-            <span class="st tag-amber">SQLite</span>
-            <span class="st tag-cyan">Bootstrap</span>
+            <span class="st tag-green">Scikit-learn</span>
+            <span class="st tag-amber">SVM</span>
+            <span class="st tag-cyan">Random Forest</span>
           </div>
-          <a href="https://github.com/varunshetty1893" target="_blank" class="proj-link">View on GitHub →</a>
+          <div class="proj-links">
+            <a href="https://github.com/varunshetty1893/covid19-pneumonia-ct-classification" target="_blank" class="proj-link">GitHub Repo →</a>
+          </div>
         </div>
 
+        <!-- PROJECT 4: GLOBAL FARMER -->
         <div class="proj-card">
           <div class="proj-accent acc-indigo"></div>
           <div class="proj-top">
             <div class="proj-icon">🌾</div>
           </div>
-          <div class="proj-title">Global Farmer</div>
-          <div class="proj-desc">Full-featured e-commerce platform connecting farmers to buyers. PHP + MySQL backend with product listings, cart, order management, and a full admin dashboard.</div>
+          <div class="proj-title">Global Farmer E-Commerce</div>
+          <div class="proj-desc">Full-stack e-commerce web platform for agricultural products featuring user authentication, shopping cart system, product filtering, and admin inventory panel.</div>
           <div class="proj-stack">
             <span class="st tag-amber">PHP</span>
             <span class="st tag-cyan">MySQL</span>
             <span class="st tag-indigo">JavaScript</span>
             <span class="st tag-green">Bootstrap</span>
           </div>
-          <a href="https://github.com/varunshetty1893" target="_blank" class="proj-link">View on GitHub →</a>
+          <div class="proj-links">
+            <a href="https://github.com/varunshetty1893/global-farmer" target="_blank" class="proj-link">GitHub Repo →</a>
+          </div>
         </div>
 
+        <!-- PROJECT 5: SMART DIET PLANNER -->
         <div class="proj-card">
           <div class="proj-accent acc-cyan"></div>
           <div class="proj-top">
-            <div class="proj-icon">⚖️</div>
+            <div class="proj-icon">🥗</div>
           </div>
-          <div class="proj-title">Legal Advisor</div>
-          <div class="proj-desc">Python-based legal guidance tool providing accessible information on common legal questions through a conversational interface. Built in collaboration with Pachushetty.</div>
+          <div class="proj-title">Smart Diet &amp; Fitness Planner</div>
+          <div class="proj-desc">Web application with user authentication, dashboard, BMI &amp; calorie intake calculation, water intake tracker, and admin management panel.</div>
           <div class="proj-stack">
+            <span class="st tag-violet">Flask</span>
             <span class="st tag-indigo">Python</span>
-            <span class="st tag-cyan">NLP</span>
+            <span class="st tag-amber">SQLite</span>
+            <span class="st tag-cyan">HTML/CSS</span>
           </div>
-          <a href="https://github.com/varunshetty1893" target="_blank" class="proj-link">View on GitHub →</a>
+          <div class="proj-links">
+            <a href="https://github.com/varunshetty1893/Smart-Fitness-Diet-Planner-Python-Project" target="_blank" class="proj-link">GitHub Repo →</a>
+          </div>
         </div>
 
+        <!-- PROJECT 6: STUDENT RESULT SYSTEM -->
         <div class="proj-card">
           <div class="proj-accent acc-amber"></div>
           <div class="proj-top">
             <div class="proj-icon">📊</div>
           </div>
           <div class="proj-title">Student Result Management</div>
-          <div class="proj-desc">Production-grade system built during TestSavvy internship. Manages student records, marks entry, result computation, and report generation for institutions.</div>
+          <div class="proj-desc">Academic result portal developed during TestSavvy internship. Secure admin/user login, marks entry, automated result calculation, and PDF report generation.</div>
           <div class="proj-stack">
             <span class="st tag-amber">PHP</span>
             <span class="st tag-cyan">MySQL</span>
             <span class="st tag-indigo">Bootstrap</span>
           </div>
-          <a href="https://github.com/varunshetty1893" target="_blank" class="proj-link">View on GitHub →</a>
+          <div class="proj-links">
+            <a href="https://github.com/varunshetty1893/Student-result-management-project" target="_blank" class="proj-link">GitHub Repo →</a>
+          </div>
         </div>
 
       </div>
@@ -838,28 +870,27 @@
   <div class="section-wrap">
     <div class="reveal">
       <div class="section-header">
-        <div class="eyebrow">Experience</div>
-        <h2>Where I've <span class="accent">worked</span></h2>
+        <div class="eyebrow">Internship</div>
+        <h2>Industry <span class="accent">Experience</span></h2>
       </div>
       <div class="exp-card">
-        <div class="exp-logo">🏢</div>
+        <div class="exp-logo">💼</div>
         <div>
-          <div class="exp-role">Web Developer Intern</div>
+          <div class="exp-role">Software Technical Intern</div>
           <div class="exp-org">TestSavvy</div>
           <div class="exp-meta">
-            <span>📅 2024 · 4 months</span>
-            <span>📍 Bengaluru, IN</span>
-            <span>🌐 Remote</span>
+            <span>📅 Academic Internship (BCA)</span>
+            <span>📍 Bengaluru, KA</span>
           </div>
           <div class="exp-desc">
-            Designed and developed a Student Result Management System deployed in production. Built a full-featured admin portal using PHP, MySQL, and Bootstrap — handling student records, mark entry workflows, automated result computation, and exportable performance reports.
+            Developed and tested web applications using HTML, CSS, JavaScript, and PHP/MySQL backend tools. Participated in debugging, application performance tuning, and collaborated on real-world project tasks across the full software development lifecycle.
           </div>
           <div class="exp-tags">
             <span class="pill hot">PHP</span>
             <span class="pill hot">MySQL</span>
-            <span class="pill">Bootstrap</span>
-            <span class="pill">HTML/CSS</span>
             <span class="pill">JavaScript</span>
+            <span class="pill">HTML5/CSS3</span>
+            <span class="pill">SDLC</span>
           </div>
         </div>
       </div>
@@ -873,7 +904,7 @@
     <div class="reveal">
       <div class="section-header">
         <div class="eyebrow">Education</div>
-        <h2>Academic <span class="accent">background</span></h2>
+        <h2>Academic <span class="accent">Background</span></h2>
       </div>
       <div class="edu-grid">
         <div class="edu-card">
@@ -881,18 +912,18 @@
           <div>
             <div class="edu-degree">Master of Computer Applications (MCA)</div>
             <div class="edu-school">Mangalore University</div>
-            <div class="edu-year">2024 – 2026</div>
+            <div class="edu-year">2024 – 2026 (Pursuing)</div>
           </div>
-          <div class="edu-gpa">CGPA 8.8</div>
+          <div class="edu-gpa">Pursuing</div>
         </div>
         <div class="edu-card">
           <div class="edu-icon">📘</div>
           <div>
             <div class="edu-degree">Bachelor of Computer Applications (BCA)</div>
-            <div class="edu-school">Mangalore University</div>
-            <div class="edu-year">Completed 2024</div>
+            <div class="edu-school">Kuvempu University</div>
+            <div class="edu-year">2021 – 2024</div>
           </div>
-          <div class="edu-gpa edu-gpa-done">Completed</div>
+          <div class="edu-gpa">CGPA: 8.7</div>
         </div>
       </div>
     </div>
@@ -905,14 +936,17 @@
     <div class="reveal">
       <div class="section-header">
         <div class="eyebrow">Contact</div>
-        <h2>Let's work <span class="accent">together</span></h2>
+        <h2>Get in <span class="accent">Touch</span></h2>
       </div>
       <div class="contact-grid">
         <div class="contact-left">
-          <p>I'm actively looking for full-time roles in software development, web development, or ML engineering. Have a role or a project? Let's talk.</p>
+          <p>I am actively seeking software development, web development, and ML roles. Feel free to reach out via email or connect on LinkedIn!</p>
           <div>
-            <a href="mailto:shettybvarun@email.com" class="c-link">
-              <span class="c-icon">✉️</span> shettybvarun@email.com
+            <a href="mailto:shettybvarun@gmail.com" class="c-link">
+              <span class="c-icon">✉️</span> shettybvarun@gmail.com
+            </a>
+            <a href="tel:+918123665363" class="c-link">
+              <span class="c-icon">📞</span> +91 81236 65363
             </a>
             <a href="https://github.com/varunshetty1893" target="_blank" class="c-link">
               <span class="c-icon">🐙</span> github.com/varunshetty1893
@@ -920,13 +954,10 @@
             <a href="https://www.linkedin.com/in/varun-shetty-b-b607bb2a6/" target="_blank" class="c-link">
               <span class="c-icon">💼</span> linkedin.com/in/varun-shetty-b
             </a>
-            <a href="#" class="c-link">
-              <span class="c-icon">📍</span> Mangalore, Karnataka, IN
-            </a>
           </div>
         </div>
         <div class="contact-form">
-          <h3>Send a message</h3>
+          <h3>Send a Message</h3>
           <div class="form-group">
             <label>Your Name</label>
             <input type="text" placeholder="John Doe" />
@@ -937,9 +968,9 @@
           </div>
           <div class="form-group">
             <label>Message</label>
-            <textarea placeholder="Hi Varun, I'd love to connect about..."></textarea>
+            <textarea placeholder="Hi Varun, I'd love to discuss an opportunity with you..."></textarea>
           </div>
-          <a href="mailto:shettybvarun@email.com" class="btn btn-primary btn-full">Send Message →</a>
+          <a href="mailto:shettybvarun@gmail.com" class="btn btn-primary btn-full">Send Message →</a>
         </div>
       </div>
     </div>
@@ -947,7 +978,7 @@
 </section>
 
 <footer>
-  <p>Designed &amp; built by <strong>Varun Shetty B</strong> · Mangalore, Karnataka · 2026</p>
+  <p>Designed &amp; Developed by <strong>Varun Shetty B</strong> · 2026</p>
 </footer>
 
 <script>
