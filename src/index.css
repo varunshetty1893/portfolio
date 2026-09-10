@@ -1,0 +1,63 @@
+@import "tailwindcss";
+
+:root {
+  --font-display: 'Unbounded', system-ui, sans-serif;
+  --font-sans: 'Space Grotesk', system-ui, sans-serif;
+  --font-mono: 'JetBrains Mono', monospace;
+  font-family: var(--font-sans);
+}
+
+.font-display {
+  font-family: var(--font-display);
+}
+
+.font-sans {
+  font-family: var(--font-sans);
+}
+
+.font-mono {
+  font-family: var(--font-mono);
+}
+
+.text-edge-outline {
+  -webkit-text-stroke: 1.5px rgba(255, 255, 255, 0.28);
+  color: transparent;
+}
+
+html:not(.dark) .text-edge-outline {
+  -webkit-text-stroke: 1.5px rgba(15, 23, 42, 0.65);
+  color: transparent;
+}
+
+/* Canvas overlay mode so background Spline 3D canvas is directly clickable */
+.canvas-overlay-mode {
+  pointer-events: none;
+}
+.canvas-overlay-mode a,
+.canvas-overlay-mode button,
+.canvas-overlay-mode input,
+.canvas-overlay-mode label,
+.canvas-overlay-mode select,
+.canvas-overlay-mode textarea,
+.canvas-overlay-mode [role="button"],
+.canvas-overlay-mode .interactive-element {
+  pointer-events: auto;
+}
+
+/* Custom minimal scrollbar */
+::-webkit-scrollbar {
+  width: 6px;
+  height: 6px;
+}
+::-webkit-scrollbar-track {
+  background: transparent;
+}
+::-webkit-scrollbar-thumb {
+  background: rgba(255, 255, 255, 0.15);
+  border-radius: 9999px;
+}
+::-webkit-scrollbar-thumb:hover {
+  background: rgba(255, 255, 255, 0.3);
+}
+
+
