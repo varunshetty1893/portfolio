@@ -77,9 +77,9 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ theme }) => {
                 {/* Browser top-bar chrome */}
                 <div className="flex items-center justify-between pb-2 mb-2 border-b border-zinc-800/40">
                   <div className="flex items-center gap-1.5">
-                    <span className="w-2 h-2 rounded-full bg-zinc-600 inline-block" />
-                    <span className="w-2 h-2 rounded-full bg-zinc-600 inline-block" />
-                    <span className="w-2 h-2 rounded-full bg-zinc-600 inline-block" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-red-500/90 inline-block ring-1 ring-red-500/30" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-yellow-400/90 inline-block ring-1 ring-yellow-400/30" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/90 inline-block ring-1 ring-emerald-500/30" />
                   </div>
                   <span className="text-[10px] font-mono text-zinc-500 truncate max-w-[150px]">
                     {project.live ? new URL(project.live).hostname : `${project.id}.local`}
@@ -248,6 +248,11 @@ export const ProjectsSection: React.FC<ProjectsSectionProps> = ({ theme }) => {
                 }`}
               >
                 <div className="flex items-center gap-2.5 sm:gap-3 min-w-0 pr-2">
+                  <div className="hidden sm:flex items-center gap-1.5 mr-1 shrink-0">
+                    <span className="w-2.5 h-2.5 rounded-full bg-red-500/90 inline-block ring-1 ring-red-500/30" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-yellow-400/90 inline-block ring-1 ring-yellow-400/30" />
+                    <span className="w-2.5 h-2.5 rounded-full bg-emerald-500/90 inline-block ring-1 ring-emerald-500/30" />
+                  </div>
                   <h3 className="font-display font-bold text-lg sm:text-2xl truncate">
                     {selectedProject.title}
                   </h3>
