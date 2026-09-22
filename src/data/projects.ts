@@ -90,6 +90,51 @@ export const projects: Project[] = [
     },
   },
   {
+    id: "rootline",
+    title: "Rootline",
+    subtitle: "Interactive Family Tree & Ancestry Lineage Platform",
+    category: "Full-Stack Web & Graph Systems",
+    description:
+      "A comprehensive genealogical platform empowering families to document ancestral lineage, visualize generational connections, record biographical memories, and traverse familial relationship graphs.",
+    badge: "Lineage Graph Platform",
+    highlights: [
+      "Dynamic interactive family tree canvas supporting zoom, pan, multi-generation exploration, and branch traversal.",
+      "Relational node architecture managing parent, child, spouse, and sibling genealogical connections.",
+      "Biographical member dossiers including timeline events, life milestones, and historical archival documents.",
+    ],
+    features: [
+      "Interactive genealogical tree visualizer with responsive relationship graph rendering",
+      "Dynamic member management: Add relatives, configure multi-generational ties, and edit profiles",
+      "Ancestry search engine filtering individuals by generation, branch, and name",
+      "Multimedia archive allowing preservation of familial historical photographs and records",
+    ],
+    technicalDetails: [
+      "React and TypeScript frontend built with responsive component architecture and state management",
+      "Express.js backend providing RESTful endpoints for tree traversal and node persistence",
+      "Tailwind CSS styling with dark/light visual clarity and fluid responsive layouts",
+      "Strict data modeling preventing circular family loops and validating parental hierarchies",
+    ],
+    github: "https://github.com/varunshetty1893/Rootline",
+    live: "https://rootlinex.vercel.app",
+    skills: {
+      frontend: [
+        { name: "React", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/react/react-original.svg" },
+        { name: "TypeScript", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/typescript/typescript-original.svg" },
+        { name: "Tailwind CSS", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/tailwindcss/tailwindcss-original.svg" },
+        { name: "HTML5/CSS3", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/html5/html5-original.svg" },
+      ],
+      backend: [
+        { name: "Node.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/nodejs/nodejs-original.svg" },
+        { name: "Express.js", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/express/express-original.svg" },
+        { name: "REST APIs", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/fastapi/fastapi-original.svg" },
+      ],
+      mlOrTools: [
+        { name: "Git", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/git/git-original.svg" },
+        { name: "VS Code", icon: "https://cdn.jsdelivr.net/gh/devicons/devicon/icons/vscode/vscode-original.svg" },
+      ],
+    },
+  },
+  {
     id: "ai-interviewer",
     title: "AI Interviewer",
     subtitle: "AI-Powered Conversational Mock Interview & Evaluation Platform",

@@ -37,6 +37,11 @@ export enum SkillNames {
   RENDER = "render",
   LINUX = "linux",
   POSTMAN = "postman",
+  DOCKER = "docker",
+  APACHE = "apache",
+  PYTEST = "pytest",
+  SQLALCHEMY = "sqlalchemy",
+  REST_API = "rest_api",
 }
 
 export interface Skill {

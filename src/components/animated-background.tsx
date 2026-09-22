@@ -238,6 +238,7 @@ interface AnimatedBackgroundProps {
   theme: "dark" | "light";
   enable3D: boolean;
   skillsMode?: "3d" | "grid";
+  selectedSkill?: Skill | null;
   onSkillSelect?: (skill: Skill | null) => void;
   playPressSound?: () => void;
   playReleaseSound?: () => void;
@@ -248,6 +249,7 @@ export const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({
   theme,
   enable3D,
   skillsMode = "grid",
+  selectedSkill,
   onSkillSelect,
   playPressSound,
   playReleaseSound,
@@ -259,6 +261,8 @@ export const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({
   const bongoIntervalRef = useRef<any>(null);
   const keycapAnimationsRef = useRef<{ start: () => void; stop: () => void } | null>(null);
   const teardownTweenRef = useRef<gsap.core.Tween | null>(null);
+  const idleFloatingTimelineRef = useRef<gsap.core.Timeline | null>(null);
+  const idleRotationTimelineRef = useRef<gsap.core.Timeline | null>(null);
   const coloredMeshesRef = useRef<THREE.Mesh[]>([]);
   const tickerRegisteredRef = useRef(false);
   const prevSectionRef = useRef<string>("hero");
@@ -306,6 +310,20 @@ export const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({
             return;
           }
 
+          const isLineArtOrArtifact =
+            childName.includes("line-art") ||
+            childName.includes("outline") ||
+            childName.includes("wireframe") ||
+            childName.includes("stroke") ||
+            childName.includes("contour");
+
+          if (isLineArtOrArtifact) {
+            child.visible = false;
+            child.scale.set(0, 0, 0);
+            child.layers.set(31);
+            return;
+          }
+
           const isLogoOrLegend =
             childName.includes("legend") ||
             childName.includes("icon") ||
@@ -318,6 +336,8 @@ export const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({
 
           if (isLogoOrLegend) {
             child.visible = true;
+            child.castShadow = false;
+            child.receiveShadow = false;
             // Keep logos & legend text crisp white and visible
             if (child.material) {
               const mats = Array.isArray(child.material) ? child.material : [child.material];
@@ -326,6 +346,8 @@ export const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({
                   m.color.set("#ffffff");
                   m.needsUpdate = true;
                 }
+                m.roughness = 0.4;
+                m.metalness = 0.0;
               });
             }
             child.layers.set(0);
@@ -334,16 +356,18 @@ export const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({
           }
 
           child.visible = true;
+          child.castShadow = false;
+          child.receiveShadow = false;
 
-          // Keycap body: create dedicated PBR material
+          // Keycap body: create dedicated PBR material (dielectric plastic, no dark specular Fresnel reflections)
           let mat = child.userData?.customKeycapMaterial as THREE.MeshStandardMaterial | undefined;
           if (!mat) {
             mat = new THREE.MeshStandardMaterial({
               color: color,
-              roughness: 0.28,
-              metalness: 0.12,
+              roughness: 0.35,
+              metalness: 0.0,
               emissive: color,
-              emissiveIntensity: 0.22,
+              emissiveIntensity: 0.25,
             });
             patchSplineMaterialContract(mat);
             child.userData.customKeycapMaterial = mat;
@@ -354,7 +378,9 @@ export const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({
           } else {
             mat.color.copy(color);
             mat.emissive.copy(color);
-            mat.emissiveIntensity = 0.22;
+            mat.emissiveIntensity = 0.25;
+            mat.roughness = 0.35;
+            mat.metalness = 0.0;
           }
 
           patchSplineMaterialContract(mat);
@@ -437,7 +463,7 @@ export const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({
             gsap.killTweensOf(mat);
             gsap.timeline()
               .to(mat, { emissiveIntensity: 0.85, duration: 0.06 })
-              .to(mat, { emissiveIntensity: 0.22, duration: 0.32, ease: "power2.out" });
+              .to(mat, { emissiveIntensity: 0.25, duration: 0.32, ease: "power2.out" });
           }
         });
       }
@@ -445,10 +471,10 @@ export const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({
       selectedSkillRef.current = skill;
       onSkillSelect?.(skill);
 
-      // Update Spline 3D Text
+      // Permanently suppress 3D floating text in Spline scene
       try {
-        app.setVariable("heading", skill.label);
-        app.setVariable("desc", skill.shortDescription);
+        app.setVariable("heading", "");
+        app.setVariable("desc", "");
       } catch {}
     },
     [playPressSound, onSkillSelect]
@@ -547,20 +573,81 @@ export const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({
       skillsMode,
     });
 
+    // Stop any existing idle floating animations before transitioning
+    if (idleFloatingTimelineRef.current) {
+      idleFloatingTimelineRef.current.kill();
+      idleFloatingTimelineRef.current = null;
+    }
+    if (idleRotationTimelineRef.current) {
+      idleRotationTimelineRef.current.kill();
+      idleRotationTimelineRef.current = null;
+    }
+
+    gsap.killTweensOf(kbd.position);
+    gsap.killTweensOf(kbd.rotation);
+    gsap.killTweensOf(kbd.scale);
+
     // Clean section transitions without glitchy bounce
     gsap.to(kbd.position, {
       x: state.position.x,
       y: state.position.y,
       z: state.position.z,
-      duration: 1.1,
+      duration: 1.2,
       ease: "power2.out",
+      onComplete: () => {
+        // Continuous, high-craft organic floating & rotation animation
+        if (validSection === "skills") {
+          // Gentle vertical floating levitation
+          const floatTl = gsap.timeline({ repeat: -1, yoyo: true });
+          floatTl.to(kbd.position, {
+            y: state.position.y + 16,
+            duration: 3.2,
+            ease: "sine.inOut",
+          });
+          idleFloatingTimelineRef.current = floatTl;
+
+          // Simple, clean, continuous rotation animation
+          const rotTl = gsap.timeline({ repeat: -1, yoyo: true });
+          rotTl
+            .to(kbd.rotation, {
+              y: state.rotation.y + 0.38,
+              x: state.rotation.x + 0.04,
+              duration: 3.8,
+              ease: "sine.inOut",
+            })
+            .to(kbd.rotation, {
+              y: state.rotation.y - 0.38,
+              x: state.rotation.x - 0.03,
+              duration: 3.8,
+              ease: "sine.inOut",
+            });
+          idleRotationTimelineRef.current = rotTl;
+        } else if (validSection === "hero" || validSection === "experience") {
+          const floatTl = gsap.timeline({ repeat: -1, yoyo: true });
+          floatTl.to(kbd.position, {
+            y: state.position.y + 12,
+            duration: 3.2,
+            ease: "sine.inOut",
+          });
+          idleFloatingTimelineRef.current = floatTl;
+
+          const rotTl = gsap.timeline({ repeat: -1, yoyo: true });
+          rotTl.to(kbd.rotation, {
+            x: state.rotation.x + 0.03,
+            y: state.rotation.y + 0.04,
+            duration: 4.2,
+            ease: "sine.inOut",
+          });
+          idleRotationTimelineRef.current = rotTl;
+        }
+      },
     });
 
     gsap.to(kbd.rotation, {
       x: state.rotation.x,
       y: state.rotation.y,
       z: state.rotation.z,
-      duration: 1.1,
+      duration: 1.2,
       ease: "power2.out",
     });
 
@@ -568,7 +655,7 @@ export const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({
       x: state.scale.x,
       y: state.scale.y,
       z: state.scale.z,
-      duration: 1.1,
+      duration: 1.2,
       ease: "power2.out",
     });
 
@@ -628,7 +715,17 @@ export const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({
     }
   }, [activeSection, splineApp, isMobile, skillsMode, applyKeyColors]);
 
-  // Handle text theme visibility inside the Spline keyboard
+  // Synchronize external skill selection (from blurred cards) with physical 3D key press
+  useEffect(() => {
+    if (!splineApp || !selectedSkill) return;
+    const scene = (splineApp as any)._scene as THREE.Scene | undefined;
+    const keyObj =
+      scene?.getObjectByName(selectedSkill.name) ||
+      (splineApp as any).findObjectByName(selectedSkill.name);
+    triggerKeyPress(selectedSkill.name, keyObj, splineApp);
+  }, [selectedSkill, splineApp, triggerKeyPress]);
+
+  // Completely suppress surrounding 3D text in the Spline keyboard scene
   useEffect(() => {
     if (!splineApp) return;
     try {
@@ -636,33 +733,28 @@ export const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({
       const textDesktopLight = splineApp.findObjectByName("text-desktop");
       const textMobileDark = splineApp.findObjectByName("text-mobile-dark");
       const textMobileLight = splineApp.findObjectByName("text-mobile");
+      const textDesktopLight2 = splineApp.findObjectByName("text-desktop-light");
+      const textMobileLight2 = splineApp.findObjectByName("text-mobile-light");
 
-      if (
-        !textDesktopDark ||
-        !textDesktopLight ||
-        !textMobileDark ||
-        !textMobileLight
-      )
-        return;
+      [
+        textDesktopDark,
+        textDesktopLight,
+        textMobileDark,
+        textMobileLight,
+        textDesktopLight2,
+        textMobileLight2,
+      ].forEach((textObj) => {
+        if (textObj) {
+          textObj.visible = false;
+          textObj.scale?.set?.(0, 0, 0);
+          if (textObj.layers) textObj.layers.set(31);
+        }
+      });
 
-      if (activeSection !== "skills") {
-        textDesktopDark.visible = false;
-        textDesktopLight.visible = false;
-        textMobileDark.visible = false;
-        textMobileLight.visible = false;
-      } else if (theme === "dark") {
-        textDesktopDark.visible = false;
-        textDesktopLight.visible = true;
-        textMobileDark.visible = false;
-        textMobileLight.visible = true;
-      } else {
-        textDesktopDark.visible = true;
-        textDesktopLight.visible = false;
-        textMobileDark.visible = true;
-        textMobileLight.visible = false;
-      }
+      splineApp.setVariable("heading", "");
+      splineApp.setVariable("desc", "");
     } catch {}
-  }, [theme, splineApp, isMobile, activeSection]);
+  }, [splineApp, activeSection]);
 
   // Comprehensive Raycasting Click & Hover Listeners
   useEffect(() => {
@@ -818,8 +910,69 @@ export const AnimatedBackground: React.FC<AnimatedBackgroundProps> = ({
           obj.position.y = 50;
           obj.userData._origY = 50;
         }
+        if (obj.isLight) {
+          obj.castShadow = false;
+          if (obj.shadow) {
+            obj.shadow.bias = -0.0005;
+            obj.shadow.normalBias = 0.05;
+          }
+        }
+        if (obj.isMesh) {
+          obj.castShadow = false;
+          obj.receiveShadow = false;
+        }
       });
     }
+
+    // Disable shadow mapping on renderer to eliminate shadow acne and dark crevice marks
+    try {
+      const renderer = (app as any)._renderer || (app as any).renderer;
+      if (renderer && renderer.shadowMap) {
+        renderer.shadowMap.enabled = false;
+      }
+    } catch {}
+
+    // Disable any postprocessing outline, cavity, or AO effect that could generate dark marks between keys
+    try {
+      const activePage = (app as any)._scene?.activePage;
+      if (activePage?.data?.postprocessing) {
+        const pp = activePage.data.postprocessing;
+        if (pp.outline) pp.outline.enabled = false;
+        if (pp.cavity) pp.cavity.enabled = false;
+        if (pp.ambientOcclusion) pp.ambientOcclusion.enabled = false;
+      }
+    } catch {}
+
+    // Suppress all extraneous text nodes and surrounding 3D text (e.g. Vercel floating descriptions)
+    const textNames = [
+      "text-desktop-dark",
+      "text-desktop",
+      "text-mobile-dark",
+      "text-mobile",
+      "text-desktop-light",
+      "text-mobile-light",
+      "text",
+      "Text",
+    ];
+    textNames.forEach((name) => {
+      const obj = app.findObjectByName(name) as any;
+      if (obj) {
+        obj.visible = false;
+        if (obj.scale && typeof obj.scale.set === "function") {
+          obj.scale.set(0, 0, 0);
+        } else if (obj.scale) {
+          obj.scale.x = 0;
+          obj.scale.y = 0;
+          obj.scale.z = 0;
+        }
+        if (obj.layers?.set) obj.layers.set(31);
+      }
+    });
+
+    try {
+      app.setVariable("heading", "");
+      app.setVariable("desc", "");
+    } catch {}
 
     // Suppress any extraneous cloned template text nodes ("JS") from non-JS keycaps
     for (const skillKey of Object.keys(KEY_COLORS)) {

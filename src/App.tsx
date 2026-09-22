@@ -164,6 +164,7 @@ export default function App() {
         theme={theme}
         enable3D={enable3D}
         skillsMode={skillsMode}
+        selectedSkill={inspectedSkill}
         onSkillSelect={(skill) => setInspectedSkill(skill)}
         playPressSound={playKeySound}
         playReleaseSound={playKeySound}

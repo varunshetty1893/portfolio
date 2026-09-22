@@ -30,18 +30,18 @@ export const STATES: Record<
   skills: {
     desktop: {
       scale: { x: 0.25, y: 0.25, z: 0.25 },
-      position: { x: 0, y: -40, z: 0 },
+      position: { x: 0, y: -20, z: 0 },
       rotation: {
-        x: 0,
-        y: Math.PI / 12,
+        x: Math.PI / 10,
+        y: Math.PI / 8,
         z: 0,
       },
     },
     mobile: {
-      scale: { x: 0.3, y: 0.3, z: 0.3 },
-      position: { x: 0, y: -40, z: 0 },
+      scale: { x: 0.28, y: 0.28, z: 0.28 },
+      position: { x: 0, y: -30, z: 0 },
       rotation: {
-        x: 0,
+        x: Math.PI / 8,
         y: Math.PI / 6,
         z: 0,
       },
@@ -112,22 +112,12 @@ export const STATES: Record<
 export const getKeyboardState = ({
   section,
   isMobile,
-  skillsMode = "3d",
 }: {
   section: Section;
   isMobile: boolean;
   skillsMode?: "3d" | "grid";
 }) => {
-  let baseTransform = STATES[section] ? STATES[section][isMobile ? "mobile" : "desktop"] : STATES.hero.desktop;
-
-  // When viewing full skills grid catalog, move the keyboard out of view so it doesn't overlap cards
-  if (section === "skills" && skillsMode === "grid") {
-    baseTransform = {
-      position: { x: isMobile ? 0 : 800, y: isMobile ? 600 : -40, z: -250 },
-      scale: { x: 0.02, y: 0.02, z: 0.02 },
-      rotation: { x: 0, y: 0, z: 0 },
-    };
-  }
+  const baseTransform = STATES[section] ? STATES[section][isMobile ? "mobile" : "desktop"] : STATES.hero.desktop;
 
   const getScaleOffset = () => {
     if (typeof window === "undefined") return 1;

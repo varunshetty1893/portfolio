@@ -5,8 +5,6 @@ import {
   Sun,
   Moon,
   Sparkles,
-  Volume2,
-  VolumeX,
   FileText,
 } from "lucide-react";
 import { config } from "@/data/config";
@@ -17,8 +15,8 @@ interface HeaderProps {
   toggleTheme: () => void;
   enable3D: boolean;
   toggle3D: () => void;
-  soundEnabled: boolean;
-  toggleSound: () => void;
+  soundEnabled?: boolean;
+  toggleSound?: () => void;
   activeSection: string;
   onOpenResume: () => void;
 }
@@ -163,27 +161,6 @@ export const Header: React.FC<HeaderProps> = ({
               <Sparkles className="w-4 h-4" />
             </button>
 
-            {/* Sound toggle button */}
-            <button
-              onClick={toggleSound}
-              title={soundEnabled ? "Mute Key Sounds" : "Enable Key Sounds"}
-              className={`p-2 rounded-lg border transition-colors ${
-                soundEnabled
-                  ? theme === "dark"
-                    ? "border-zinc-700 bg-zinc-800 text-zinc-100"
-                    : "border-zinc-300 bg-zinc-200 text-zinc-900"
-                  : theme === "dark"
-                  ? "border-zinc-800 bg-zinc-900 text-zinc-500"
-                  : "border-zinc-200 bg-zinc-100 text-zinc-400"
-              }`}
-            >
-              {soundEnabled ? (
-                <Volume2 className="w-4 h-4" />
-              ) : (
-                <VolumeX className="w-4 h-4" />
-              )}
-            </button>
-
             {/* Theme Toggle Button */}
             <button
               onClick={handleThemeChange}
@@ -268,21 +245,6 @@ export const Header: React.FC<HeaderProps> = ({
                 >
                   <Sparkles className="w-3.5 h-3.5" />
                   <span>3D {enable3D ? "ON" : "OFF"}</span>
-                </button>
-                <button
-                  onClick={toggleSound}
-                  className={`p-2 rounded-lg border text-xs flex items-center gap-1 ${
-                    soundEnabled
-                      ? "border-zinc-700 bg-zinc-800 text-white"
-                      : "border-zinc-800 text-zinc-500"
-                  }`}
-                >
-                  {soundEnabled ? (
-                    <Volume2 className="w-3.5 h-3.5" />
-                  ) : (
-                    <VolumeX className="w-3.5 h-3.5" />
-                  )}
-                  <span>Sound</span>
                 </button>
               </div>
 
